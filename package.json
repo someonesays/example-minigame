@@ -10,11 +10,11 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
-    "@types/node": "^22.9.3",
+    "@types/node": "^22.10.0",
     "typescript": "^5.7.2",
     "vite": "^5.4.11"
   },
   "dependencies": {
-    "@someonesays/minigame-sdk": "^0.0.2"
+    "@someonesays/minigame-sdk": "^0.0.3"
   }
 }
