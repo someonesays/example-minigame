@@ -14,7 +14,6 @@ app.innerHTML = `
       <select id="event">
         <option value=""></option>
         <option value="endGame">endGame</option>
-        <option value="setClientPrompt">setClientPrompt</option>
         <option value="setGameState">setGameState</option>
         <option value="setPlayerState">setPlayerState</option>
         <option value="sendGameMessage">sendGameMessage</option>
@@ -36,7 +35,7 @@ app.innerHTML = `
 // Get textarea and make a logEvent function
 const logsTextarea = document.getElementById("logs") as HTMLTextAreaElement;
 function logEvent(event: string, value: object) {
-  console.debug("[PROMPT]", event, value);
+  console.debug("[MINIGAME]", event, value);
   logsTextarea.value += `${event}: ${JSON.stringify(value)}\n\n`;
 }
 
@@ -52,7 +51,7 @@ if (import.meta.env.MODE === "development") {
   sdk = new MinigameSdk();
 }
 
-console.debug("[PROMPT] SDK", sdk);
+console.debug("[MINIGAME] SDK", sdk);
 
 // Handle events
 const eventSelect = document.getElementById("event") as HTMLSelectElement;
@@ -126,9 +125,6 @@ eventSelect.onchange = () => {
           Prizes:<br><textarea id="prizes">${JSON.stringify([{ user: "", type: 0 }])}</textarea>
         `;
       break;
-    case "setClientPrompt":
-      optionsSpan.innerHTML = `Prompt: <input id="prompt">`;
-      break;
     case "setGameState":
       optionsSpan.innerHTML = `State: <input id="state">`;
       break;
@@ -158,9 +154,6 @@ sendButton.onclick = () => {
     case "endGame": {
       const prizes = JSON.parse((document.getElementById("prizes") as HTMLTextAreaElement)?.value);
       return sdk.endGame({ prizes });
-    }
-    case "setClientPrompt": {
-      return sdk.setClientPrompt({ prompt: (document.getElementById("prompt") as HTMLInputElement)?.value });
     }
     case "setGameState": {
       let state = (document.getElementById("state") as HTMLInputElement).value;
