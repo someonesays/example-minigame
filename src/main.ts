@@ -1,5 +1,6 @@
 import "./style.css";
-import { BaseMinigameSdk, TestingMinigameSdk, MinigameSdk, ParentOpcodes } from "@someonesays/minigame-sdk";
+import { TestingMinigameSdk, MinigameSdk, ParentOpcodes } from "@someonesays/minigame-sdk";
+import type { BaseMinigameSdk } from "@someonesays/minigame-sdk";
 
 const app = document.querySelector<HTMLDivElement>("#app");
 if (!app) throw new Error("Missing app");
