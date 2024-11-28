@@ -1,10 +1,11 @@
 {
-  "name": "test",
+  "name": "example-minigame",
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
+    "dev": "vite --mode development",
+    "dev/prod": "vite --mode production",
+    "build": "tsc && vite build --mode production",
     "preview": "vite preview",
     "format": "npx @biomejs/biome format --write ./"
   },
@@ -15,6 +16,6 @@
     "vite": "^5.4.11"
   },
   "dependencies": {
-    "@someonesays/minigame-sdk": "^0.0.3"
+    "@someonesays/minigame-sdk": "^0.0.5"
   }
 }

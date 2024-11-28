@@ -1,5 +1,5 @@
 import "./style.css";
-import { MinigameSdk, ParentOpcodes } from "@someonesays/minigame-sdk";
+import { BaseMinigameSdk, TestingMinigameSdk, MinigameSdk, ParentOpcodes } from "@someonesays/minigame-sdk";
 
 const app = document.querySelector<HTMLDivElement>("#app");
 if (!app) throw new Error("Missing app");
@@ -40,7 +40,17 @@ function logEvent(event: string, value: object) {
 }
 
 // Initialize MinigameSdk
-const sdk = new MinigameSdk();
+let sdk: BaseMinigameSdk;
+if (import.meta.env.MODE === "development") {
+  sdk = new TestingMinigameSdk({
+    minigameId: import.meta.env.VITE_MINIGAME_ID,
+    testingAccessCode: import.meta.env.VITE_TESTING_ACCESS_CODE,
+    playersToStart: 1,
+  });
+} else {
+  sdk = new MinigameSdk();
+}
+
 console.debug("[PROMPT] SDK", sdk);
 
 // Handle events

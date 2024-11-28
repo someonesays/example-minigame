@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@someonesays/minigame-sdk':
-        specifier: ^0.0.3
-        version: 0.0.3
+        specifier: ^0.0.5
+        version: 0.0.5
     devDependencies:
       '@biomejs/biome':
         specifier: ^1.9.4
@@ -218,6 +218,10 @@ packages:
     cpu: [x64]
     os: [win32]
 
+  '@msgpack/msgpack@3.0.0-beta2':
+    resolution: {integrity: sha512-y+l1PNV0XDyY8sM3YtuMLK5vE3/hkfId+Do8pLo/OPxfxuFAUwcGz3oiiUuV46/aBpwTzZ+mRWVMtlSKbradhw==}
+    engines: {node: '>= 14'}
+
   '@rollup/rollup-android-arm-eabi@4.27.4':
     resolution: {integrity: sha512-2Y3JT6f5MrQkICUyRVCw4oa0sutfAsgaSsb0Lmmy1Wi2y7X5vT9Euqw4gOsCyy0YfKURBg35nhUKZS4mDcfULw==}
     cpu: [arm]
@@ -308,8 +312,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@someonesays/minigame-sdk@0.0.3':
-    resolution: {integrity: sha512-63DFgcDTrLCdRDDYgsrz6k+57g0fYbmo85EYMsXJ7YXASJjD6x5RFMaRQUmwJTbgFdJVHtyKccZxRccRQiWbpg==}
+  '@someonesays/minigame-sdk@0.0.5':
+    resolution: {integrity: sha512-MEiqbeM27d2ua1gc9NKtGwZKo5CMmULbvgNb0ImQIZP5L7YTSRIfCjRL5IKoL8FLuJBMksgBHDuLGz4SXTQT4Q==}
 
   '@types/estree@1.0.6':
     resolution: {integrity: sha512-AYnb1nQyY49te+VRAVgmzfcgjYS91mY5P0TKUDCLEM+gNnA+3T6rWITXRLYCpahpqSQbN5cE+gHpnPyXjHWxcw==}
@@ -496,6 +500,8 @@ snapshots:
   '@esbuild/win32-x64@0.21.5':
     optional: true
 
+  '@msgpack/msgpack@3.0.0-beta2': {}
+
   '@rollup/rollup-android-arm-eabi@4.27.4':
     optional: true
 
@@ -550,8 +556,9 @@ snapshots:
   '@rollup/rollup-win32-x64-msvc@4.27.4':
     optional: true
 
-  '@someonesays/minigame-sdk@0.0.3':
+  '@someonesays/minigame-sdk@0.0.5':
     dependencies:
+      '@msgpack/msgpack': 3.0.0-beta2
       eventemitter3: 5.0.1
 
   '@types/estree@1.0.6': {}
