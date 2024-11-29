@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@someonesays/minigame-sdk':
-        specifier: ^0.0.7
-        version: 0.0.7
+        specifier: ^0.0.8
+        version: 0.0.8
     devDependencies:
       '@biomejs/biome':
         specifier: ^1.9.4
@@ -312,8 +312,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@someonesays/minigame-sdk@0.0.7':
-    resolution: {integrity: sha512-bs3j60RIzJJGkXEBWKa1uY8KM02LK0ATiVMI+2+qV7oKDTj0tYLgDn+w2EzXKuklBd4be7go8nLpPgotQmfJug==}
+  '@someonesays/minigame-sdk@0.0.8':
+    resolution: {integrity: sha512-gEWTJnqgHDUQEWFTmE9Iahpcj2419We5qJ/xD/scvQuH+lW58pt2a/0P7S6Ixla/iFuGYTS9Zbj3V/VzkPE0LA==}
 
   '@types/estree@1.0.6':
     resolution: {integrity: sha512-AYnb1nQyY49te+VRAVgmzfcgjYS91mY5P0TKUDCLEM+gNnA+3T6rWITXRLYCpahpqSQbN5cE+gHpnPyXjHWxcw==}
@@ -556,7 +556,7 @@ snapshots:
   '@rollup/rollup-win32-x64-msvc@4.27.4':
     optional: true
 
-  '@someonesays/minigame-sdk@0.0.7':
+  '@someonesays/minigame-sdk@0.0.8':
     dependencies:
       '@msgpack/msgpack': 3.0.0-beta2
       eventemitter3: 5.0.1
