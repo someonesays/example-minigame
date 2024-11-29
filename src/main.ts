@@ -70,7 +70,7 @@ setInterval(() => {
 // Handles SDK logic
 sdk.ready();
 
-sdk.on(ParentOpcodes.READY, (evt) => {
+sdk.once(ParentOpcodes.READY, (evt) => {
   logEvent("Ready", evt);
 });
 
@@ -78,7 +78,7 @@ sdk.on(ParentOpcodes.UPDATE_SETTINGS, (evt) => {
   logEvent("UpdateSettings", evt);
 });
 
-sdk.on(ParentOpcodes.START_GAME, (evt) => {
+sdk.once(ParentOpcodes.START_GAME, (evt) => {
   logEvent("StartGame", evt);
 });
 
