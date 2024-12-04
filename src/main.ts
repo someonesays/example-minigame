@@ -49,8 +49,6 @@ if (import.meta.env.MODE === "development") {
     minigameId: import.meta.env.VITE_MINIGAME_ID,
     testingAccessCode: import.meta.env.VITE_TESTING_ACCESS_CODE,
     playersToStart: 1,
-    opcode: "Oppack",
-    baseUrl: "http://localhost:3000",
   });
 } else {
   sdk = new MinigameSdk();
