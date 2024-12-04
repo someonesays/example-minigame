@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@someonesays/minigame-sdk':
-        specifier: ^0.0.10
-        version: 0.0.10
+        specifier: ^0.0.12
+        version: 0.0.12
     devDependencies:
       '@biomejs/biome':
         specifier: ^1.9.4
@@ -312,14 +312,20 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@someonesays/minigame-sdk@0.0.10':
-    resolution: {integrity: sha512-VoOgJzlDbvvchJ7XhoBJsKYcSFW2klsT5efljd5QOEhzLC+wW1+OC7OOsbHgAU0N470f3UPE0S2OAED1X0aliA==}
+  '@someonesays/minigame-sdk@0.0.12':
+    resolution: {integrity: sha512-C1iuSmWOil2OU2i8F+50Od3ru2hVDWYjKMQWYNoLBfX7MhvVqN6fJoSSZ+m+lhvZIU0ggigqwtxBjQcrd+8GNQ==}
 
   '@types/estree@1.0.6':
     resolution: {integrity: sha512-AYnb1nQyY49te+VRAVgmzfcgjYS91mY5P0TKUDCLEM+gNnA+3T6rWITXRLYCpahpqSQbN5cE+gHpnPyXjHWxcw==}
 
   '@types/node@22.10.1':
     resolution: {integrity: sha512-qKgsUwfHZV2WCWLAnVP1JqnpE6Im6h3Y0+fYgMTasNQ7V++CBX5OT1as0g0f+OyubbFqhf6XVNIsmN4IIhEgGQ==}
+
+  base64-js@1.5.1:
+    resolution: {integrity: sha512-AKpaYlHn8t4SVbOHCy+b5+KKgvR4vrsD8vbvrbiQJps7fKDTkjkDry6ji0rUJjC0kzbNePLwzxq8iypo41qeWA==}
+
+  buffer@6.0.3:
+    resolution: {integrity: sha512-FTiCpNxtwiZZHEZbcbTIcZjERVICn9yq/pDFkTl95/AxzD1naBctN7YO68riM/gLSDY7sdrMby8hofADYuuqOA==}
 
   esbuild@0.21.5:
     resolution: {integrity: sha512-mg3OPMV4hXywwpoDxu3Qda5xCKQi+vCTZq8S9J/EpkhB2HzKXq4SNFZE3+NK93JYxc8VMSep+lOUSC/RVKaBqw==}
@@ -333,6 +339,9 @@ packages:
     resolution: {integrity: sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==}
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
     os: [darwin]
+
+  ieee754@1.2.1:
+    resolution: {integrity: sha512-dcyqhDvX1C46lXZcVqCpK+FtMRQVdIMN6/Df5js2zouUsqG7I6sFxitIC+7KYK29KdXOLHdu9zL4sFnoVQnqaA==}
 
   nanoid@3.3.8:
     resolution: {integrity: sha512-WNLf5Sd8oZxOm+TzppcYk8gVOgP+l58xNy58D0nbUnOxOWRWvlcCV4kUF7ltmI6PsrLl/BgKEyS4mqsGChFN0w==}
@@ -556,9 +565,10 @@ snapshots:
   '@rollup/rollup-win32-x64-msvc@4.27.4':
     optional: true
 
-  '@someonesays/minigame-sdk@0.0.10':
+  '@someonesays/minigame-sdk@0.0.12':
     dependencies:
       '@msgpack/msgpack': 3.0.0-beta2
+      buffer: 6.0.3
       eventemitter3: 5.0.1
 
   '@types/estree@1.0.6': {}
@@ -566,6 +576,13 @@ snapshots:
   '@types/node@22.10.1':
     dependencies:
       undici-types: 6.20.0
+
+  base64-js@1.5.1: {}
+
+  buffer@6.0.3:
+    dependencies:
+      base64-js: 1.5.1
+      ieee754: 1.2.1
 
   esbuild@0.21.5:
     optionalDependencies:
@@ -597,6 +614,8 @@ snapshots:
 
   fsevents@2.3.3:
     optional: true
+
+  ieee754@1.2.1: {}
 
   nanoid@3.3.8: {}
 

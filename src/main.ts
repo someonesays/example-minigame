@@ -19,6 +19,9 @@ app.innerHTML = `
         <option value="sendGameMessage">sendGameMessage</option>
         <option value="sendPlayerMessage">sendPlayerMessage</option>
         <option value="sendPrivateMessage">sendPrivateMessage</option>
+        <option value="sendBinaryGameMessage">sendBinaryGameMessage</option>
+        <option value="sendBinaryPlayerMessage">sendBinaryPlayerMessage</option>
+        <option value="sendBinaryPrivateMessage">sendBinaryPrivateMessage</option>
       </select><br>
       <span id="options"></span><br>
       <button id="send" style="display:none">Send</button><br>
@@ -46,6 +49,8 @@ if (import.meta.env.MODE === "development") {
     minigameId: import.meta.env.VITE_MINIGAME_ID,
     testingAccessCode: import.meta.env.VITE_TESTING_ACCESS_CODE,
     playersToStart: 1,
+    opcode: "Oppack",
+    baseUrl: "http://localhost:3000",
   });
 } else {
   sdk = new MinigameSdk();
@@ -110,6 +115,18 @@ sdk.on(ParentOpcodes.RECEIVED_PRIVATE_MESSAGE, (evt) => {
   logEvent("ReceivedPrivateMessage", evt);
 });
 
+sdk.on(ParentOpcodes.RECEIVED_BINARY_GAME_MESSAGE, (evt) => {
+  logEvent("ReceivedBinaryGameMessage", [...evt]);
+});
+
+sdk.on(ParentOpcodes.RECEIVED_BINARY_PLAYER_MESSAGE, (evt) => {
+  logEvent("ReceivedBinaryPlayerMessage", { user: evt.user, message: [...evt.message] });
+});
+
+sdk.on(ParentOpcodes.RECEIVED_BINARY_PRIVATE_MESSAGE, (evt) => {
+  logEvent("ReceivedBinaryPrivateMessage", { fromUser: evt.fromUser, toUser: evt.toUser, message: [...evt.message] });
+});
+
 eventSelect.onchange = () => {
   if (!eventSelect.value) {
     sendButton.style.display = "none";
@@ -122,17 +139,17 @@ eventSelect.onchange = () => {
   switch (eventSelect.value) {
     case "endGame":
       optionsSpan.innerHTML = `
-          Prizes:<br><textarea id="prizes">${JSON.stringify([{ user: "", type: 0 }])}</textarea>
-        `;
+        Prizes:<br><textarea id="prizes">${JSON.stringify([{ user: "", type: 0 }])}</textarea>
+      `;
       break;
     case "setGameState":
       optionsSpan.innerHTML = `State: <input id="state">`;
       break;
     case "setPlayerState":
       optionsSpan.innerHTML = `
-          Player ID / User: <input id="user"><br>
-          State: <input id="state">
-        `;
+        Player ID / User: <input id="user"><br>
+        State: <input id="state">
+      `;
       break;
     case "sendGameMessage":
       optionsSpan.innerHTML = `Message: <input id="message">`;
@@ -142,9 +159,21 @@ eventSelect.onchange = () => {
       break;
     case "sendPrivateMessage":
       optionsSpan.innerHTML = `
-          To player ID / user: <input id="user"><br>
-          Message: <input id="message">
-        `;
+        To player ID / user: <input id="user"><br>
+        Message: <input id="message">
+      `;
+      break;
+    case "sendBinaryGameMessage":
+      optionsSpan.innerHTML = `Message: <input id="message" value="[]">`;
+      break;
+    case "sendBinaryPlayerMessage":
+      optionsSpan.innerHTML = `Message: <input id="message" value="[]">`;
+      break;
+    case "sendBinaryPrivateMessage":
+      optionsSpan.innerHTML = `
+        To player ID / user: <input id="user"><br>
+        Message: <input id="message" value="[]">
+      `;
       break;
   }
 };
@@ -191,6 +220,19 @@ sendButton.onclick = () => {
         message = JSON.parse(message);
       } catch (err) {}
       return sdk.sendPrivateMessage({ user, message });
+    }
+    case "sendBinaryGameMessage": {
+      let message = JSON.parse((document.getElementById("message") as HTMLInputElement).value);
+      return sdk.sendBinaryGameMessage(new Uint8Array(message));
+    }
+    case "sendBinaryPlayerMessage": {
+      let message = JSON.parse((document.getElementById("message") as HTMLInputElement).value);
+      return sdk.sendBinaryPlayerMessage(new Uint8Array(message));
+    }
+    case "sendBinaryPrivateMessage": {
+      const user = (document.getElementById("user") as HTMLInputElement).value || undefined;
+      let message = JSON.parse((document.getElementById("message") as HTMLInputElement).value);
+      return sdk.sendBinaryPrivateMessage({ user, message: new Uint8Array(message) });
     }
   }
 };

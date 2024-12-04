@@ -16,6 +16,6 @@
     "vite": "^5.4.11"
   },
   "dependencies": {
-    "@someonesays/minigame-sdk": "^0.0.11"
+    "@someonesays/minigame-sdk": "^0.0.12"
   }
 }
