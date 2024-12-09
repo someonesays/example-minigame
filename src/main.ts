@@ -137,7 +137,7 @@ eventSelect.onchange = () => {
   switch (eventSelect.value) {
     case "endGame":
       optionsSpan.innerHTML = `
-        Prizes:<br><textarea id="prizes">${JSON.stringify([{ user: "", type: 0 }])}</textarea>
+        Prizes:<br><textarea id="prizes">${JSON.stringify([{ user: "", type: 1 }])}</textarea>
       `;
       break;
     case "setGameState":
