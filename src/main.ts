@@ -136,9 +136,7 @@ eventSelect.onchange = () => {
 
   switch (eventSelect.value) {
     case "endGame":
-      optionsSpan.innerHTML = `
-        Prizes:<br><textarea id="prizes">${JSON.stringify([{ user: "", type: 1 }])}</textarea>
-      `;
+      optionsSpan.innerHTML = "";
       break;
     case "setGameState":
       optionsSpan.innerHTML = `State: <input id="state">`;
@@ -179,8 +177,7 @@ eventSelect.onchange = () => {
 sendButton.onclick = () => {
   switch (eventSelect.value) {
     case "endGame": {
-      const prizes = JSON.parse((document.getElementById("prizes") as HTMLTextAreaElement)?.value);
-      return sdk.endGame({ prizes });
+      return sdk.endGame();
     }
     case "setGameState": {
       let state = (document.getElementById("state") as HTMLInputElement).value;
