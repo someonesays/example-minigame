@@ -114,15 +114,15 @@ sdk.on(ParentOpcodes.RECEIVED_PRIVATE_MESSAGE, (evt) => {
 });
 
 sdk.on(ParentOpcodes.RECEIVED_BINARY_GAME_MESSAGE, (evt) => {
-  logEvent("ReceivedBinaryGameMessage", [...evt]);
+  logEvent("ReceivedBinaryGameMessage", evt);
 });
 
 sdk.on(ParentOpcodes.RECEIVED_BINARY_PLAYER_MESSAGE, (evt) => {
-  logEvent("ReceivedBinaryPlayerMessage", { user: evt.user, message: [...evt.message] });
+  logEvent("ReceivedBinaryPlayerMessage", { user: evt.user, message: evt.message });
 });
 
 sdk.on(ParentOpcodes.RECEIVED_BINARY_PRIVATE_MESSAGE, (evt) => {
-  logEvent("ReceivedBinaryPrivateMessage", { fromUser: evt.fromUser, toUser: evt.toUser, message: [...evt.message] });
+  logEvent("ReceivedBinaryPrivateMessage", { fromUser: evt.fromUser, toUser: evt.toUser, message: evt.message });
 });
 
 eventSelect.onchange = () => {
@@ -143,7 +143,7 @@ eventSelect.onchange = () => {
       break;
     case "setPlayerState":
       optionsSpan.innerHTML = `
-        Player ID / User: <input id="user"><br>
+        Player ID / User: <input id="user" type="number"><br>
         State: <input id="state">
       `;
       break;
@@ -155,7 +155,7 @@ eventSelect.onchange = () => {
       break;
     case "sendPrivateMessage":
       optionsSpan.innerHTML = `
-        To player ID / user: <input id="user"><br>
+        To player ID / user: <input id="user" type="number"><br>
         Message: <input id="message">
       `;
       break;
@@ -167,7 +167,7 @@ eventSelect.onchange = () => {
       break;
     case "sendBinaryPrivateMessage":
       optionsSpan.innerHTML = `
-        To player ID / user: <input id="user"><br>
+        To player ID / user: <input id="user" type="number"><br>
         Message: <input id="message" value="[]">
       `;
       break;
@@ -187,7 +187,7 @@ sendButton.onclick = () => {
       return sdk.setGameState({ state });
     }
     case "setPlayerState": {
-      const user = (document.getElementById("user") as HTMLInputElement).value;
+      const user = Number((document.getElementById("user") as HTMLInputElement).value);
       let state = (document.getElementById("state") as HTMLInputElement).value;
       try {
         state = JSON.parse(state);
@@ -209,7 +209,8 @@ sendButton.onclick = () => {
       return sdk.sendPlayerMessage({ message });
     }
     case "sendPrivateMessage": {
-      const user = (document.getElementById("user") as HTMLInputElement).value || undefined;
+      const userInput = document.getElementById("user") as HTMLInputElement;
+      const user = userInput.value !== "" ? Number(userInput.value) : undefined;
       let message = (document.getElementById("message") as HTMLInputElement).value;
       try {
         message = JSON.parse(message);
@@ -225,7 +226,9 @@ sendButton.onclick = () => {
       return sdk.sendBinaryPlayerMessage(new Uint8Array(message));
     }
     case "sendBinaryPrivateMessage": {
-      const user = (document.getElementById("user") as HTMLInputElement).value || undefined;
+      const userInput = document.getElementById("user") as HTMLInputElement;
+      const user = userInput.value !== "" ? Number(userInput.value) : undefined;
+      console.log(user);
       let message = JSON.parse((document.getElementById("message") as HTMLInputElement).value);
       return sdk.sendBinaryPrivateMessage({ user, message: new Uint8Array(message) });
     }
