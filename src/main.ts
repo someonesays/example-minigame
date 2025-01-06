@@ -14,6 +14,7 @@ app.innerHTML = `
       <select id="event">
         <option value=""></option>
         <option value="endGame">endGame</option>
+        <option value="saveLocalData">saveLocalData</option>
         <option value="setGameState">setGameState</option>
         <option value="setPlayerState">setPlayerState</option>
         <option value="sendGameMessage">sendGameMessage</option>
@@ -138,6 +139,9 @@ eventSelect.onchange = () => {
     case "endGame":
       optionsSpan.innerHTML = "";
       break;
+    case "saveLocalData":
+      optionsSpan.innerHTML = `Data: <input id="data">`;
+      break;
     case "setGameState":
       optionsSpan.innerHTML = `State: <input id="state">`;
       break;
@@ -179,6 +183,10 @@ sendButton.onclick = () => {
     case "endGame": {
       return sdk.endGame();
     }
+    case "saveLocalData": {
+      const data = (document.getElementById("data") as HTMLInputElement).value;
+      return sdk.saveLocalData({ data });
+    }
     case "setGameState": {
       let state = (document.getElementById("state") as HTMLInputElement).value;
       try {
@@ -219,11 +227,11 @@ sendButton.onclick = () => {
     }
     case "sendBinaryGameMessage": {
       let message = JSON.parse((document.getElementById("message") as HTMLInputElement).value);
-      return sdk.sendBinaryGameMessage(new Uint8Array(message));
+      return sdk.sendBinaryGameMessage({ message: new Uint8Array(message) });
     }
     case "sendBinaryPlayerMessage": {
       let message = JSON.parse((document.getElementById("message") as HTMLInputElement).value);
-      return sdk.sendBinaryPlayerMessage(new Uint8Array(message));
+      return sdk.sendBinaryPlayerMessage({ message: new Uint8Array(message) });
     }
     case "sendBinaryPrivateMessage": {
       const userInput = document.getElementById("user") as HTMLInputElement;
